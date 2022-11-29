@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SignIn</title>
+    <title>Register</title>
     <script src="https://kit.fontawesome.com/315b871b24.js" crossorigin="anonymous"></script>
     <style>
         *{
@@ -30,6 +30,7 @@
             /* border: 1px solid teal; */
             margin-bottom: 30px;
             background-color: white;
+           
             
         }
 
@@ -37,32 +38,58 @@
             width: 10%;
             font-size: 24px;
             background-color: white;
-            /* border: 2px solid red; */
-            /* margin-bottom: -10px; */
-            /* padding: 0; */
+            color: rgb(93, 86, 86);
         }
         #heading > h5{
             width: 90%;
-            margin: 0;
+            /* margin: 0; */
             padding: 0;
             margin-top: 2px;
+            margin-left: 80px;
             font-size: 18px;
             background-color: white;
+            /* color: rgb(56, 54, 54); */
             /* border: 1px solid red; */
-            text-align: center;
+            /* text-align: center; */
         }
-        #email-div{
+        #reward{
+            background-color: #fff;
+            text-align: center;
+            margin: 20px auto 50px auto;
+        }
+        #reward > p{
             background-color: #fff;
         }
-        #user-email{
+        #reward > p > span{
+            background-color: #fff;
+            color: #fc2779;
+        }
+
+        .input-div{
+            background-color: #fff;
+            margin: 14px auto;
+        }
+        .input-div > p {
+            margin: 3px;
+            padding: 0;
+            text-align: right;
+            font-size: 10px;
+            background-color: #fff;
+            letter-spacing: 0.5px;
+            color: red;
+            font-weight: 600;
+        }
+
+        input{
             width: 274px;
-            border: 1px solid #fc2779;
+            border: none;
+            border-bottom: 1px solid #fc2779;            
             padding: 13px;
             font-size: 14px;
-            text-align: center;
+            background-color: #fff;
             
         }
-        #user-email:focus{
+        input:focus{
             outline: 0;
         }
         #email-messege{
@@ -73,10 +100,10 @@
             background-color: #fff;
         }
 
-        #emailBtn{
+        #registerBtn{
             width: 100%;
-            padding: 14px;
             margin: 30px auto;
+            padding: 14px;
             border: none;
             background-color: #fc2779;
             color: #fff;
@@ -91,15 +118,27 @@
     <div id="main-container">
         <div id="heading">
             <i class="fas fa-times"></i>
-            <h5 id="title">LOGIN / REGISTER</h5>
+            <h5 id="title">REGISTER</h5>
         </div>
-        <div id="email-div">
+        <div id="reward">
+            <p>Register to Earn <span id="reward-text"> 2000  Reward Points!</span></p>
+        </div>
+        <div class="input-div">
+            <input type="Name" id="user-name" placeholder="Name">
+            <p id="name-messege">PLEASE ENTER NAME</p>
+        </div>
+        <div class="input-div">
+            <input type="number" id="user-number" placeholder="Phone Number">
+            <p id="number-messege">ENTER A VALID MOBILE NUMBER</p>
+        </div>
+        <div class="input-div">
             <input type="email" id="user-email" placeholder="Enter Email Id or Phone Number">
-            <p id="email-messege">REQUIRED</p>
         </div>
-        <div id="password-div">
+        <div class="input-div">
+            <input type="password" id="user-password" placeholder="Create Password">
+            <p id="password-messege">PLEASE ENTER MINIMUM 6 CHARACTER</p>
         </div>
-        <button id="emailBtn">PROCEED</button>
+        <button id="registerBtn">REGISTER</button>
         
     </div>
 </body>
