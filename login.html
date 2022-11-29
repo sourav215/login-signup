@@ -4,9 +4,105 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>SignIn</title>
+    <script src="https://kit.fontawesome.com/315b871b24.js" crossorigin="anonymous"></script>
+    <style>
+        *{
+            background-color: #f3f3f3;
+            
+        }
+        #main-container{
+            border: 1px solid black;
+            width: 300px;
+            margin: 70px auto;
+            padding: 30px;
+            border: 1px solid rgb(213, 208, 208);
+            border-radius: 14px;
+            background-color: white;
+        }
+        #main-container > div {
+           
+        }
+
+        #heading{
+            display: flex;
+            font-weight: 100;
+            /* border: 1px solid teal; */
+            margin-bottom: 30px;
+            background-color: white;
+            
+        }
+
+        #heading > i{
+            width: 10%;
+            font-size: 24px;
+            background-color: white;
+            /* border: 2px solid red; */
+            /* margin-bottom: -10px; */
+            /* padding: 0; */
+        }
+        #heading > h5{
+            width: 90%;
+            margin: 0;
+            padding: 0;
+            margin-top: 2px;
+            font-size: 18px;
+            background-color: white;
+            /* border: 1px solid red; */
+            text-align: center;
+        }
+        #email-div{
+            background-color: #fff;
+        }
+        #user-email{
+            width: 274px;
+            border: 1px solid #fc2779;
+            padding: 13px;
+            font-size: 14px;
+            text-align: center;
+            
+        }
+        #user-email:focus{
+            outline: 0;
+        }
+        #email-messege{
+            margin: 3px;
+            padding: 0;
+            text-align: right;
+            font-size: 12px;
+            background-color: #fff;
+        }
+
+        #emailBtn{
+            width: 100%;
+            padding: 14px;
+            border: none;
+            background-color: #fc2779;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        #emailBtn:hover{
+            width: 102%;
+            height: 50px;
+        }
+    </style>
 </head>
 <body>
-    
+    <div id="main-container">
+        <div id="heading">
+            <i class="fas fa-times"></i>
+            <h5 id="title">LOGIN / REGISTER</h5>
+        </div>
+        <div id="email-div">
+            <input type="email" id="user-email" placeholder="Enter Email Id or Phone Number">
+            <p id="email-messege">REQUIRED</p>
+        </div>
+        <div id="password-div">
+        </div>
+        <button id="emailBtn">PROCEED</button>
+        
+    </div>
 </body>
 </html>
