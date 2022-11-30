@@ -23,11 +23,10 @@
         border-radius: 14px;
         background-color: white;
       }
-      
+
       #heading {
         display: flex;
         font-weight: 100;
-        /* border: 1px solid teal; */
         margin-bottom: 30px;
         background-color: white;
       }
@@ -100,22 +99,14 @@
         outline: none;
         /* transition: transform .5s; */
       }
-      
+
       input:valid + label,
       input:focus + label {
         top: -10px;
         left: 0;
         color: #fc2779;
         font-size: 14px;
-      }
-
-      #email-messege {
-        margin: 3px;
-        padding: 0;
-        text-align: right;
-        font-size: 10px;
-        background-color: #fff;
-      }
+      }   
 
       #registerBtn {
         width: 100%;
@@ -152,19 +143,18 @@
       <div class="input-div">
         <input type="Name" id="user-name" maxlength="36" required="" />
         <label>Name</label>
-        <!-- <p id="name-messege">PLEASE ENTER NAME</p> -->
-        <p id="name-messege"></p>
+        <p id="name-message"></p>
       </div>
       <div class="input-div">
         <input
           type="tel"
           id="user-number"
-          minlength="10"
+          minlength="1"
           maxlength="10"
-          required=""
+          required
         />
         <label>Phone Number</label>
-        <p id="number-messege">ENTER A VALID MOBILE NUMBER</p>
+        <p id="number-message"></p>
       </div>
       <div class="input-div">
         <input type="email" id="user-email" />
@@ -173,14 +163,75 @@
         <input
           id="user-password"
           type="password"
-          minlength="6"
-          maxlength="14"
-          required=""
+          minlength="1"
+          maxlength="10"
+          required
         />
         <label>Create Password</label>
-        <p id="password-messege">PLEASE ENTER MINIMUM 6 CHARACTER</p>
+        <p id="password-message"></p>
       </div>
       <button id="registerBtn">REGISTER</button>
     </div>
   </body>
 </html>
+<script>
+  let nameInput = document.querySelector("#user-name");
+  let numberInput = document.querySelector("#user-number");
+  let passwordInput = document.querySelector("#user-password");
+  let regBtn = document.querySelector("#registerBtn");
+  const lowerCase = new RegExp("(?=.*[a-z])");
+  const upperCase = new RegExp("(?=.*[A-Z])");
+  const hasNum = new RegExp("(?=.*[0-9])");
+  const specialChar = new RegExp("(?=.*[!@#\$%\^&\*])");
+  const fourChar = new RegExp("(?=.{4,})");
+
+  //   Form Validation
+  nameInput.addEventListener("input", validateName);
+  numberInput.addEventListener("input", validateNumber);
+  passwordInput.addEventListener("input", validatePassword);
+
+  function validateName() {
+    let userName = nameInput.value;
+    let nameMessage = document.querySelector("#name-message");
+    if (userName.length == 0) {
+      nameMessage.textContent = "PLEASE ENTER NAME";
+    } else {
+      nameMessage.innerHTML = "";
+    }
+  }
+
+  function validateNumber() {
+    let userNum = numberInput.value;
+    let flag = true;
+    for (let ele of userNum) {
+      if (!hasNum.test(ele)) flag = false;
+    }
+    let numMessage = document.querySelector("#number-message");
+    if (userNum.length == 10 && flag) {
+      numMessage.textContent = "";
+    } else {
+      numMessage.innerHTML = "ENTER A VALID MOBILE NUMBER";
+    }
+  }
+
+  function validatePassword() {
+    let userPassword = passwordInput.value;
+    let passMessage = document.querySelector("#password-message");
+
+    if (
+      lowerCase.test(userPassword) &&
+      upperCase.test(userPassword) &&
+      hasNum.test(userPassword) &&
+      specialChar.test(userPassword) &&
+      fourChar.test(userPassword)
+    ) {
+      passMessage.textContent = "";
+    } else if (userPassword.length < 4) {
+      passMessage.textContent = "PLEASE ENTER MINIMUM 4 CHARACTER";
+    } else {
+      passMessage.textContent = "PLEASE ENTER VALID PASSWORD";
+    }
+  }
+
+  //   Form Validation Ends here
+</script>
