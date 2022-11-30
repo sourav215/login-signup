@@ -1,106 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SignIn</title>
-    <script src="https://kit.fontawesome.com/315b871b24.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/315b871b24.js"
+      crossorigin="anonymous"
+    ></script>
     <style>
-        *{
-            background-color: #f3f3f3;
-            
-        }
-        #main-container{
-            border: 1px solid black;
-            width: 300px;
-            margin: 70px auto;
-            padding: 30px;
-            border: 1px solid rgb(213, 208, 208);
-            border-radius: 14px;
-            background-color: white;
-        }
-        /* #main-container > div {
+      * {
+        background-color: #f3f3f3;
+      }
+      #main-container {
+        border: 1px solid black;
+        width: 300px;
+        margin: 70px auto;
+        padding: 30px;
+        border: 1px solid rgb(213, 208, 208);
+        border-radius: 14px;
+        background-color: white;
+      }
+      /* #main-container > div {
            
         } */
 
-        #heading{
-            display: flex;
-            font-weight: 100;
-            /* border: 1px solid teal; */
-            margin-bottom: 30px;
-            background-color: white;
-            
-        }
+      #heading {
+        display: flex;
+        font-weight: 100;
+        /* border: 1px solid teal; */
+        margin-bottom: 30px;
+        background-color: white;
+      }
 
-        #heading > i{
-            width: 10%;
-            font-size: 24px;
-            background-color: white;
-            /* border: 2px solid red; */
-            /* margin-bottom: -10px; */
-            /* padding: 0; */
-        }
-        #heading > h5{
-            width: 90%;
-            margin: 0;
-            padding: 0;
-            margin-top: 2px;
-            font-size: 18px;
-            background-color: white;
-            /* border: 1px solid red; */
-            text-align: center;
-        }
-        #email-div{
-            background-color: #fff;
-        }
-        #user-email{
-            width: 274px;
-            border: 1px solid #fc2779;
-            padding: 13px;
-            font-size: 14px;
-            text-align: center;
-            
-        }
-        #user-email:focus{
-            outline: 0;
-        }
-        #email-messege{
-            margin: 3px;
-            padding: 0;
-            text-align: right;
-            font-size: 10px;
-            background-color: #fff;
-        }
+      #heading > i {
+        width: 10%;
+        font-size: 24px;
+        background-color: white;
+        /* border: 2px solid red; */
+        /* margin-bottom: -10px; */
+        /* padding: 0; */
+      }
+      #heading > h5 {
+        width: 90%;
+        margin: 0;
+        padding: 0;
+        margin-top: 2px;
+        font-size: 18px;
+        background-color: white;
+        /* border: 1px solid red; */
+        text-align: center;
+      }
+      .inputDiv {
+        background-color: #fff;
+      }
+      .inputBox {
+        width: 274px;
+        border: 1px solid #fc2779;
+        padding: 13px;
+        font-size: 14px;
+        text-align: center;
+        outline: 0;
+      }
 
-        #emailBtn{
-            width: 100%;
-            padding: 14px;
-            margin: 30px auto;
-            border: none;
-            background-color: #fc2779;
-            color: #fff;
-            font-size: 16px;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-        
+      #password-div {
+        margin-top: 30px;
+      }
+
+      .message {
+        margin: 3px;
+        padding: 0;
+        text-align: right;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #fc2779;
+        background-color: #fff;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 14px;
+        margin: 60px auto;
+        border: none;
+        background-color: #fc2779;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: transform 0.5s;
+      }
+
+      .btn:hover {
+        transform: scale(1.05);
+      }
+
+      #password-div {
+        display: none;
+      }
+      #loginBtn {
+        display: none;
+      }
+
+      /* #proceedBtn{
+        display: none;
+      } */
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div id="main-container">
-        <div id="heading">
-            <i class="fas fa-times"></i>
-            <h5 id="title">LOGIN / REGISTER</h5>
-        </div>
-        <div id="email-div">
-            <input type="email" id="user-email" placeholder="Enter Email Id or Phone Number">
-            <p id="email-messege">REQUIRED</p>
-        </div>
-        <div id="password-div">
-        </div>
-        <button id="emailBtn">PROCEED</button>
-        
+      <div id="heading">
+        <i class="fas fa-times"></i>
+        <h5 id="title">LOGIN / REGISTER</h5>
+      </div>
+      <div id="email-div" class="inputDiv">
+        <input
+          type="email"
+          class="inputBox"
+          id="user-email"
+          placeholder="Enter Email Id or Phone Number"
+        />
+        <p class="message" id="email-message"></p>
+      </div>
+      <div class="inputDiv" id="password-div">
+        <input
+          type="password"
+          class="inputBox"
+          id="user-password"
+          placeholder="Enter Password"
+        />
+        <p class="message" id="password-messege"></p>
+      </div>
+      <div id="password-div"></div>
+      <button class="btn" id="loginBtn">LOGIN</button>
+      <button class="btn" id="proceedBtn">PROCEED</button>
     </div>
-</body>
+  </body>
 </html>
+<script>
+
+  const lowerCase = new RegExp("(?=.*[a-z])");
+  const upperCase = new RegExp("(?=.*[A-Z])");
+  const hasNum = new RegExp("(?=.*[0-9])");
+  const specialChar = new RegExp("(?=.*[!@#\$%\^&\*])");
+  const fourChar = new RegExp("(?=.{4,})");
+  const hasAt = new RegExp("(?=.*@)");
+  
+
+  let inputEmail = document.querySelector("#user-email");
+  let inputPassword = document.querySelector("#user-password");
+  let proceedBtn = document.querySelector("#proceedBtn");
+  let loginBtn = document.querySelector("#loginBtn");
+
+  proceedBtn.addEventListener("click", verifyEmail);
+
+  loginBtn.addEventListener("click", verifyUser);
+
+  function verifyUser(event) {
+    event.preventDefault();
+
+    let email = inputEmail.value;
+    let password = inputPassword.value;
+
+    let isValidPass =
+      lowerCase.test(password) &&
+      upperCase.test(password) &&
+      hasNum.test(password) &&
+      specialChar.test(password) &&
+      fourChar.test(password);
+
+    if (!isValidPass) return;
+
+    
+    let nykaaUser = JSON.parse(localStorage.getItem("nykaaRegUser"));
+
+    if (email == nykaaUser.email && password == nykaaUser.password) {
+      alert("Successful");
+    } else if (email != nykaaUser.email) {
+      alert("Invalid Email");
+    } else  {
+      alert("Invalid Password");
+    } 
+  }
+
+  function verifyEmail(event) {
+    event.preventDefault();
+    let email = inputEmail.value;
+    if (!hasAt.test(email)) {
+      return;
+    }
+    let nykaaUser = JSON.parse(localStorage.getItem("nykaaRegUser")) || "";
+    if (!nykaaUser || email != nykaaUser.email) {
+        localStorage.setItem("recentUser",JSON.stringify(email));
+        window.location.href = "./signup.html";
+    } else if (email == nykaaUser.email) {
+      inputEmail.value = email;
+      
+      document.querySelector("#password-div").style.display = "block";
+      proceedBtn.style.display = "none";
+      loginBtn.style.display = "block";
+    }
+  }
+
+//   Form Validation
+
+inputEmail.addEventListener("input", validateEmail);
+inputPassword.addEventListener("input", validatePassword);
+
+function validateEmail(){
+    let userEmail = inputEmail.value;
+   
+    if ( userEmail.length < 3 || !hasAt.test(userEmail)) {
+        document.querySelector("#email-message").textContent = "Enter Valid Email";
+    }else{
+        document.querySelector("#email-message").textContent = "";
+    }
+
+}
+
+function validatePassword() {
+    let userPassword = inputPassword.value;
+    let passMessage = document.querySelector("#password-messege");
+
+    if (
+      lowerCase.test(userPassword) &&
+      upperCase.test(userPassword) &&
+      hasNum.test(userPassword) &&
+      specialChar.test(userPassword) &&
+      fourChar.test(userPassword)
+    ) {
+      passMessage.textContent = "";
+    } else if (userPassword.length < 4) {
+      passMessage.textContent = "PLEASE ENTER MINIMUM 4 CHARACTER";
+    } else {
+      passMessage.textContent = "PLEASE ENTER VALID PASSWORD";
+    }
+  }
+//   Form Validation ends here
+</script>
