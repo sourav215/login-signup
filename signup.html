@@ -106,7 +106,7 @@
         left: 0;
         color: #fc2779;
         font-size: 14px;
-      }   
+      }
 
       #registerBtn {
         width: 100%;
@@ -126,7 +126,6 @@
       #registerBtn:hover {
         transform: scale(1.05);
       }
-
     </style>
   </head>
   <body>
@@ -157,7 +156,8 @@
         <p id="number-message"></p>
       </div>
       <div class="input-div">
-        <input type="email" id="user-email" />
+        <input type="email" id="user-email" required />
+        <label>Email</label>
       </div>
       <div class="input-div">
         <input
@@ -177,6 +177,7 @@
 <script>
   let nameInput = document.querySelector("#user-name");
   let numberInput = document.querySelector("#user-number");
+  let emailInput = document.querySelector("#user-email");
   let passwordInput = document.querySelector("#user-password");
   let regBtn = document.querySelector("#registerBtn");
   const lowerCase = new RegExp("(?=.*[a-z])");
@@ -185,6 +186,11 @@
   const specialChar = new RegExp("(?=.*[!@#\$%\^&\*])");
   const fourChar = new RegExp("(?=.{4,})");
 
+  showUserEmail();
+  function showUserEmail() {
+    let userMail = JSON.parse(localStorage.getItem("recentUser")) || "";
+    emailInput.value = userMail;
+  }
   //   Form Validation
   nameInput.addEventListener("input", validateName);
   numberInput.addEventListener("input", validateNumber);
@@ -234,4 +240,46 @@
   }
 
   //   Form Validation Ends here
+  // New User Registration
+  let registerBtn = document.querySelector("#registerBtn");
+  registerBtn.addEventListener("click", registerNewUser);
+  function registerNewUser(event) {
+    event.preventDefault();
+    let userName = nameInput.value;
+    let userNum = numberInput.value;
+    let userEmail = emailInput.value;
+    let userPassword = passwordInput.value;
+
+    let flag = true;
+    for (let ele of userNum) {
+      if (!hasNum.test(ele)) flag = false;
+    }
+
+    let isValidName = userName.length > 0;
+    let isValidNum = userNum.length == 10 && flag;
+    let isValidPass =
+      lowerCase.test(userPassword) &&
+      upperCase.test(userPassword) &&
+      hasNum.test(userPassword) &&
+      specialChar.test(userPassword) &&
+      fourChar.test(userPassword);
+    if (isValidName && isValidNum && isValidPass) {
+      let user = {
+        name: userName,
+        phoneNumber: userPassword,
+        email: userEmail,
+        password: userPassword,
+      };
+
+      localStorage.setItem("nykaaRegUser", JSON.stringify(user));
+      nameInput.value = "";
+      numberInput.value = "";
+      emailInput.value = "";
+      passwordInput.value = "";
+      window.location.href = "./login.html";
+    } else {
+      console.log("Failed");
+    }
+  }
+  // New User Registration ends here
 </script>
