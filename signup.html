@@ -5,6 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
     <script
       src="https://kit.fontawesome.com/315b871b24.js"
       crossorigin="anonymous"
@@ -12,6 +18,8 @@
     <style>
       * {
         background-color: #f3f3f3;
+        font-family: "Roboto", sans-serif;
+        letter-spacing: 0.5px;
       }
 
       #main-container {
@@ -42,8 +50,8 @@
         width: 90%;
         padding: 0;
         margin-top: 2px;
-        margin-left: 80px;
-        font-size: 18px;
+        margin-left: 90px;
+        font-size: 16px;
         background-color: white;
       }
 
@@ -55,6 +63,7 @@
 
       #reward > p {
         background-color: #fff;
+        font-size: 14px;
       }
 
       #reward > p > span {
@@ -94,7 +103,7 @@
         border: none;
         border-bottom: 1px solid #fc2779;
         padding: 10px 0;
-        font-size: 14px;
+        font-size: 16px;
         background-color: #fff;
         outline: none;
         /* transition: transform .5s; */
@@ -105,7 +114,7 @@
         top: -10px;
         left: 0;
         color: #fc2779;
-        font-size: 14px;
+        font-size: 13px;
       }
 
       #registerBtn {
@@ -175,6 +184,23 @@
   </body>
 </html>
 <script>
+  // Get and Post
+  let getRegUser = async (url) => {
+    let res = await fetch(url);
+    let data = await res.json();
+    return data;
+  };
+
+  let postRegUser = async (url, body) => {
+    let res = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: { "Content-type": "application/json" },
+    });
+    console.log("Added Data");
+  };
+  // Get and Post
+  let userUrl = `http://localhost:3000/nykaaRegUser`;
   let nameInput = document.querySelector("#user-name");
   let numberInput = document.querySelector("#user-number");
   let emailInput = document.querySelector("#user-email");
@@ -238,8 +264,8 @@
       passMessage.textContent = "PLEASE ENTER VALID PASSWORD";
     }
   }
-
   // Form Validation Ends here
+
   // New User Registration
   let registerBtn = document.querySelector("#registerBtn");
   registerBtn.addEventListener("click", registerNewUser);
@@ -271,14 +297,15 @@
         password: userPassword,
       };
 
-      localStorage.setItem("nykaaRegUser", JSON.stringify(user));
+      postRegUser(userUrl, user);
       nameInput.value = "";
       numberInput.value = "";
       emailInput.value = "";
       passwordInput.value = "";
+      alert("Signup Successful");
       window.location.href = "./login.html";
     } else {
-      console.log("Failed");
+      alert("Failed");
     }
   }
   // New User Registration ends here

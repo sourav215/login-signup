@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
     <title>SignIn</title>
     <script
       src="https://kit.fontawesome.com/315b871b24.js"
@@ -12,6 +18,8 @@
     <style>
       * {
         background-color: #f3f3f3;
+        font-family: "Roboto", sans-serif;
+        letter-spacing: 0.5px;
       }
       #main-container {
         border: 1px solid black;
@@ -38,19 +46,16 @@
         width: 10%;
         font-size: 24px;
         background-color: white;
-        /* border: 2px solid red; */
-        /* margin-bottom: -10px; */
-        /* padding: 0; */
       }
       #heading > h5 {
         width: 90%;
         margin: 0;
         padding: 0;
         margin-top: 2px;
-        font-size: 18px;
+        font-size: 16px;
         background-color: white;
-        /* border: 1px solid red; */
-        text-align: center;
+        /* text-align: center; */
+        margin-left: 65px;
       }
       .inputDiv {
         background-color: #fff;
@@ -140,6 +145,14 @@
   </body>
 </html>
 <script>
+  let userUrl = `http://localhost:3000/nykaaRegUser`;
+  // Get
+  let getRegUser = async () => {
+    let res = await fetch(userUrl);
+    let data = await res.json();
+    return data;
+  };  
+  // Get ends here
 
   const lowerCase = new RegExp("(?=.*[a-z])");
   const upperCase = new RegExp("(?=.*[A-Z])");
@@ -147,7 +160,6 @@
   const specialChar = new RegExp("(?=.*[!@#\$%\^&\*])");
   const fourChar = new RegExp("(?=.{4,})");
   const hasAt = new RegExp("(?=.*@)");
-  
 
   let inputEmail = document.querySelector("#user-email");
   let inputPassword = document.querySelector("#user-password");
@@ -158,7 +170,9 @@
 
   loginBtn.addEventListener("click", verifyUser);
 
-  function verifyUser(event) {
+
+
+  async function verifyUser(event) {
     event.preventDefault();
 
     let email = inputEmail.value;
@@ -173,54 +187,74 @@
 
     if (!isValidPass) return;
 
-    
-    let nykaaUser = JSON.parse(localStorage.getItem("nykaaRegUser"));
-
-    if (email == nykaaUser.email && password == nykaaUser.password) {
-      alert("Successful");
-    } else if (email != nykaaUser.email) {
-      alert("Invalid Email");
-    } else  {
-      alert("Invalid Password");
-    } 
+    let allUsers = await getRegUser();
+    // console.log(allUsers);
+    let flag = false;
+    allUsers.forEach((nykaaUser) => {
+      if (email == nykaaUser.email && password == nykaaUser.password) {
+        flag = true;
+        alert("Login Successful");
+        // window.location.href = "";
+        // return;
+      }
+    });
+    if(!flag){
+      alert("Invalid Email or Password");
+    }
   }
 
-  function verifyEmail(event) {
+
+  async function verifyEmail(event) {
     event.preventDefault();
     let email = inputEmail.value;
     if (!hasAt.test(email)) {
       return;
     }
-    let nykaaUser = JSON.parse(localStorage.getItem("nykaaRegUser")) || "";
-    if (!nykaaUser || email != nykaaUser.email) {
-        localStorage.setItem("recentUser",JSON.stringify(email));
-        window.location.href = "./signup.html";
-    } else if (email == nykaaUser.email) {
-      inputEmail.value = email;
-      
-      document.querySelector("#password-div").style.display = "block";
-      proceedBtn.style.display = "none";
-      loginBtn.style.display = "block";
+
+    let allUsers = await getRegUser();
+
+    if (allUsers.length == 0) {
+      localStorage.setItem("recentUser", JSON.stringify(email));
+      window.location.href = "./signup.html";
+      return;
+    }
+
+    let flag = false;
+    allUsers.forEach((nykaaUser) => {
+      if (email == nykaaUser.email) {
+        inputEmail.value = email;
+        document.querySelector("#password-div").style.display = "block";
+        proceedBtn.style.display = "none";
+        loginBtn.style.display = "block";
+        flag = true;        
+        return;
+      }
+    });
+    if (!flag) {
+      localStorage.setItem("recentUser", JSON.stringify(email));
+      window.location.href = "./signup.html";
+    }
+    
+  }
+
+  //   Form Validation
+
+  inputEmail.addEventListener("input", validateEmail);
+  inputPassword.addEventListener("input", validatePassword);
+
+  function validateEmail() {
+    let userEmail = inputEmail.value;
+
+    if (userEmail.length < 3 || !hasAt.test(userEmail)) {
+      document.querySelector("#email-message").textContent =
+        "Enter Valid Email";
+    } else {
+      document.querySelector("#email-message").textContent = "";
     }
   }
 
-//   Form Validation
 
-inputEmail.addEventListener("input", validateEmail);
-inputPassword.addEventListener("input", validatePassword);
-
-function validateEmail(){
-    let userEmail = inputEmail.value;
-   
-    if ( userEmail.length < 3 || !hasAt.test(userEmail)) {
-        document.querySelector("#email-message").textContent = "Enter Valid Email";
-    }else{
-        document.querySelector("#email-message").textContent = "";
-    }
-
-}
-
-function validatePassword() {
+  function validatePassword() {
     let userPassword = inputPassword.value;
     let passMessage = document.querySelector("#password-messege");
 
@@ -238,5 +272,5 @@ function validatePassword() {
       passMessage.textContent = "PLEASE ENTER VALID PASSWORD";
     }
   }
-//   Form Validation ends here
+  //   Form Validation ends here
 </script>

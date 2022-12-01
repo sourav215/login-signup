@@ -1,0 +1,42 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "nykaaRegUser": [
+    {
+      "name": "Sou",
+      "phoneNumber": "2347239472",
+      "email": "sou@gmail.com",
+      "password": "sS2@",
+      "id": 1
+    },
+    {
+      "name": "Papai",
+      "phoneNumber": "8376654286",
+      "email": "pap@gmail.com",
+      "password": "qQ4$",
+      "id": 2
+    },
+    {
+      "name": "Abc",
+      "phoneNumber": "9734523759",
+      "email": "abc@gmail.comm",
+      "password": "aA1!",
+      "id": 3
+    },
+    {
+      "name": "PQR",
+      "phoneNumber": "9275937296",
+      "email": "Pqr@gmail.com",
+      "password": "pP8*",
+      "id": 4
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
